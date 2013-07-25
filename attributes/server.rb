@@ -1,7 +1,13 @@
 package_machine = node['kernel']['machine'] == "x86_64" ? "x86_64" : "x86"
 
-default['couchbase']['server']['edition'] = "enterprise"
-default['couchbase']['server']['version'] = "2.1.0"
+default['couchbase']['server']['edition'] = "community"
+default['couchbase']['server']['version'] = "2.0.1"
+
+default['couchbase']['server']['username'] = "Administrator"
+default['couchbase']['server']['password'] = "password"
+
+default['couchbase']['server']['memory_quota_mb'] = 4000
+#default['couchbase']['server']['memory_quota_mb'] = Couchbase::MaxMemoryQuotaCalculator.from_node(node).in_megabytes
 
 case node['platform_family']
 when "debian"
@@ -31,12 +37,6 @@ else
   default['couchbase']['server']['database_path'] = "#{node['couchbase']['server']['install_dir']}/var/lib/couchbase/data"
   default['couchbase']['server']['log_dir'] = "#{node['couchbase']['server']['install_dir']}/var/lib/couchbase/logs"
 end
-
-default['couchbase']['server']['username'] = "Administrator"
-default['couchbase']['server']['password'] = "password"
-
-default['couchbase']['server']['memory_quota_mb'] = 4000
-#default['couchbase']['server']['memory_quota_mb'] = Couchbase::MaxMemoryQuotaCalculator.from_node(node).in_megabytes
 
 default['source']['bucket'] = "default"
 default['remote']['bucket'] = "default"
